@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>农信链 - 基于区块链与AI的农村信用生态构建者</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.css">
+    <style>
+        :root {
+            --primary-color: #2e7d32;
+            --secondary-color: #689f38;
+            --accent-color: #8bc34a;
+            --dark-color: #1b5e20;
+            --light-color: #dcedc8;
+        }
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background-color: #f5f5f5;
+            scroll-behavior: smooth;
+        }
+        .navbar {
+            background-color: var(--dark-color);
+            position: sticky;
+            top: 0;
+            z-index: 1020;
+        }
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('farmland.jpg');
+            background-size: cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        .feature-card {
+            border-left: 5px solid var(--primary-color);
+            transition: transform 0.3s;
+        }
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .credit-score {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .blockchain-badge {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            font-weight: bold;
+        }
+        section {
+            padding: 80px 0;
+        }
+        #credit-center, #financial-services, #supply-chain, #credit-mall {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="农信链" height="40">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#home">首页</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#credit-center">信用中心</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#financial-services">金融服务</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#supply-chain">供应链管理</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#credit-mall">信用积分商城</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <div class="dropdown me-3">
+                        <button class="btn btn-outline-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-people-fill"></i> 当前角色：农户端
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item active" href="#">农户端</a></li>
+                            <li><a class="dropdown-item" href="financial-portal.html">金融机构端</a></li>
+                            <li><a class="dropdown-item" href="government-portal.html">政府端</a></li>
+                        </ul>
+                    </div>
+                    <button class="btn btn-outline-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">登录</button>
+                    <button class="btn btn-light" data-bs-toggle="modal" data-bs-target="#registerModal">注册</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 登录模态框 -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">登录农信链</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="loginPhone" class="form-label">手机号</label>
+                            <input type="tel" class="form-control" id="loginPhone" placeholder="请输入注册手机号">
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">密码</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="请输入密码">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">记住我</label>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">登录</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <a href="#" class="text-decoration-none">忘记密码？</a>
+                    </div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <span>还没有账号？</span>
+                    <a href="#" class="text-success ms-2" data-bs-toggle="modal" data-bs-target="#registerModal" data-bs-dismiss="loginModal">立即注册</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 注册模态框 -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">注册农信链</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="registerPhone" class="form-label">手机号</label>
+                            <input type="tel" class="form-control" id="registerPhone" placeholder="请输入手机号">
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerCode" class="form-label">验证码</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="registerCode" placeholder="请输入验证码">
+                                <button class="btn btn-outline-secondary" type="button" id="sendCodeBtn">获取验证码</button>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">设置密码</label>
+                            <input type="password" class="form-control" id="registerPassword" placeholder="请设置6-20位密码">
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">确认密码</label>
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="请再次输入密码">
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agreeTerms">
+                            <label class="form-check-label" for="agreeTerms">我已阅读并同意<a href="#" class="text-success">《用户协议》</a></label>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">注册</button>
+                    </form>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <span>已有账号？</span>
+                    <a href="#" class="text-success ms-2" data-bs-toggle="modal" data-bs-target="#loginModal" data-bs-dismiss="registerModal">立即登录</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 主展示区 -->
+    <header class="hero-section" id="home">
+        <div class="container">
+            <h1 class="display-4 fw-bold mb-4">农信链 - 农村信用生态构建者</h1>
+            <p class="lead mb-5">基于区块链与AI技术的农村信用评估与金融服务平台</p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="#credit-center" class="btn btn-primary btn-lg px-4">立即体验</a>
+                <a href="#features" class="btn btn-outline-light btn-lg px-4">了解更多</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主要功能区域 -->
+    <section class="py-5" id="credit-center">
+        <div class="container">
+            <h2 class="text-center mb-5">信用中心</h2>
+            <div class="row">
+                <!-- 信用评分展示 -->
+                <div class="col-md-4 mb-4">
+                    <div class="credit-score h-100">
+                        <h4 class="text-center mb-4">我的农信分</h4>
+                        <div class="text-center mb-3">
+                            <div class="display-3 fw-bold text-success">768</div>
+                            <span class="text-muted">良好信用</span>
+                        </div>
+                        <canvas id="creditRadarChart" height="250"></canvas>
+                        <div class="mt-3">
+                            <span class="badge blockchain-badge me-2">区块链存证</span>
+                            <span class="badge blockchain-badge">实时更新</span>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#creditDetailModal">查看信用详情</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 信用动态 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">信用动态</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span>订单履约率</span>
+                                        <span class="text-success">+5分</span>
+                                    </div>
+                                    <small class="text-muted">2023-10-15 14:30</small>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span>合作社评价</span>
+                                        <span class="text-success">+3分</span>
+                                    </div>
+                                    <small class="text-muted">2023-10-14 09:15</small>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span>贷款按时还款</span>
+                                        <span class="text-success">+10分</span>
+                                    </div>
+                                    <small class="text-muted">2023-10-10 16:45</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="#" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#creditHistoryModal">查看全部记录</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 推荐金融服务 -->
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">推荐金融服务</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <h6>春耕贷</h6>
+                                <div class="d-flex justify-content-between">
+                                    <span>额度: ¥50,000-200,000</span>
+                                    <span class="text-success">利率: 4.35%</span>
+                                </div>
+                                <div class="progress mt-2" style="height: 8px;">
+                                    <div class="progress-bar bg-success" style="width: 85%;"></div>
+                                </div>
+                                <small class="text-muted">匹配度: 85%</small>
+                                <div class="text-center mt-2">
+                                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#loanDetailModal">立即申请</button>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <h6>农产品电商贷</h6>
+                                <div class="d-flex justify-content-between">
+                                    <span>额度: ¥30,000-100,000</span>
+                                    <span class="text-success">利率: 5.25%</span>
+                                </div>
+                                <div class="progress mt-2" style="height: 8px;">
+                                    <div class="progress-bar bg-success" style="width: 72%;"></div>
+                                </div>
+                                <small class="text-muted">匹配度: 72%</small>
+                                <div class="text-center mt-2">
+                                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#loanDetailModal">立即申请</button>
+                                </div>
+                            </div>
+                            <div>
+                                <h6>养殖设备升级贷</h6>
+                                <div class="d-flex justify-content-between">
+                                    <span>额度: ¥100,000-500,000</span>
+                                    <span class="text-success">利率: 4.75%</span>
+                                </div>
+                                <div class="progress mt-2" style="height: 8px;">
+                                    <div class="progress-bar bg-success" style="width: 68%;"></div>
+                                </div>
+                                <small class="text-muted">匹配度: 68%</small>
+                                <div class="text-center mt-2">
+                                    <button class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#loanDetailModal">立即申请</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="#financial-services" class="btn btn-sm btn-success">查看全部金融产品</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 区块链数据存证展示 -->
+    <section class="py-5 bg-light" id="features">
+        <div class="container">
+            <h2 class="text-center mb-5">区块链数据存证</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-success bg-opacity-10 p-2 rounded me-3">
+                                    <i class="bi bi-file-earmark-lock fs-4 text-success"></i>
+                                </div>
+                                <h5 class="mb-0">土地确权数据</h5>
+                            </div>
+                            <p class="text-muted">您的土地承包合同、确权证书等关键信息已上链存证，确保数据不可篡改。</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">最后更新时间: 2023-10-12</small>
+                                <span class="badge bg-success">已验证</span>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#landDataModal">查看详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-success bg-opacity-10 p-2 rounded me-3">
+                                    <i class="bi bi-cash-coin fs-4 text-success"></i>
+                                </div>
+                                <h5 class="mb-0">金融交易记录</h5>
+                            </div>
+                            <p class="text-muted">所有贷款、还款记录均通过区块链存储，实现全程可追溯。</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">交易数量: 24笔</small>
+                                <span class="badge bg-success">已验证</span>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#transactionModal">查看详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-success bg-opacity-10 p-2 rounded me-3">
+                                    <i class="bi bi-graph-up fs-4 text-success"></i>
+                                </div>
+                                <h5 class="mb-0">生产数据</h5>
+                            </div>
+                            <p class="text-muted">作物生长监测、农机使用等物联网数据实时上链，为信用评估提供动态依据。</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">数据点: 1,248个</small>
+                                <span class="badge bg-success">实时同步</span>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#productionDataModal">查看详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100 feature-card">
+                        <div class="card-body">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="bg-success bg-opacity-10 p-2 rounded me-3">
+                                    <i class="bi bi-people fs-4 text-success"></i>
+                                </div>
+                                <h5 class="mb-0">社会评价</h5>
+                            </div>
+                            <p class="text-muted">村集体议事会评价、公益参与度等社会行为数据加密存储于联盟链。</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">评价次数: 18次</small>
+                                <span class="badge bg-success">加密存储</span>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#socialRatingModal">查看详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 金融服务 -->
+    <section class="py-5" id="financial-services">
+        <div class="container">
+            <h2 class="text-center mb-5">金融服务</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">春耕贷</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>额度范围</span>
+                                    <span class="fw-bold">¥50,000-200,000</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>贷款利率</span>
+                                    <span class="text-success fw-bold">4.35%起</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>贷款期限</span>
+                                    <span>1-3年</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>还款方式</span>
+                                    <span>按季付息，到期还本</span>
+                                </li>
+                            </ul>
+                            <p class="text-muted">专为春耕生产设计的低息贷款产品，凭农信分可享额外利率优惠。</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#loanDetailModal">立即申请</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">农产品电商贷</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>额度范围</span>
+                                    <span class="fw-bold">¥30,000-100,000</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>贷款利率</span>
+                                    <span class="text-success fw-bold">5.25%起</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>贷款期限</span>
+                                    <span>6-12个月</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>还款方式</span>
+                                    <span>等额本息</span>
+                                </li>
+                            </ul>
+                            <p class="text-muted">支持农产品电商销售的专项贷款，凭电商平台流水可提高授信额度。</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#loanDetailModal">立即申请</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">养殖设备升级贷</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush mb-3">
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>额度范围</span>
+                                    <span class="fw-bold">¥100,000-500,000</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>贷款利率</span>
+                                    <span class="text-success fw-bold">4.75%起</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>贷款期限</span>
+                                    <span>2-5年</span>
+                                </li>
+                                <li class="list-group-item d-flex justify-content-between">
+                                    <span>还款方式</span>
+                                    <span>按半年付息，分期还本</span>
+                                </li>
+                            </ul>
+                            <p class="text-muted">支持现代化养殖设备采购的长期贷款，设备可抵押上链确权。</p>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <button class="btn btn-success w-100" data-bs-toggle="modal" data-bs-target="#loanDetailModal">立即申请</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#allLoansModal">查看全部金融产品</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 供应链管理 -->
+    <section class="py-5 bg-light" id="supply-chain">
+        <div class="container">
+            <h2 class="text-center mb-5">供应链管理</h2>
+            <div class="row">
+                <div class="col-md-8 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">供应链网络</h5>
+                        </div>
+                        <div class="card-body">
+                            <div id="supplyChainGraph" style="height: 300px;"></div>
+                            <p class="mt-3 text-muted">展示您与合作社、加工企业之间的信用传导关系网络，基于图神经网络分析隐性担保能力。</p>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#supplyChainDetailModal">查看供应链详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">订单履约分析</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="orderFulfillmentChart" height="250"></canvas>
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>历史履约率</span>
+                                    <span class="fw-bold">92%</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>行业平均</span>
+                                    <span>85%</span>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#orderAnalysisModal">查看订单分析</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">我的合作伙伴</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group">
+                                <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#partnerDetailModal">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">绿丰合作社</h6>
+                                        <small class="text-success">合作中</small>
+                                    </div>
+                                    <p class="mb-1">主要合作: 水稻种植、收购</p>
+                                    <small class="text-muted">合作时长: 3年2个月</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#partnerDetailModal">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">田园食品有限公司</h6>
+                                        <small class="text-success">合作中</small>
+                                    </div>
+                                    <p class="mb-1">主要合作: 大米加工、销售</p>
+                                    <small class="text-muted">合作时长: 2年5个月</small>
+                                </a>
+                                <a href="#" class="list-group-item list-group-item-action" data-bs-toggle="modal" data-bs-target="#partnerDetailModal">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h6 class="mb-1">大地合作社</h6>
+                                        <small class="text-success">合作中</small>
+                                    </div>
+                                    <p class="mb-1">主要合作: 蔬菜种植、收购</p>
+                                    <small class="text-muted">合作时长: 1年8个月</small>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="#" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#allPartnersModal">查看全部合作伙伴</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">供应链金融</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <h6>应收账款融资</h6>
+                                <p class="text-muted">基于与核心企业的订单合同，申请应收账款融资。</p>
+                                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#receivablesModal">立即申请</button>
+                            </div>
+                            <div class="mb-3">
+                                <h6>订单融资</h6>
+                                <p class="text-muted">凭有效采购订单，申请生产资金支持。</p>
+                                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#orderFinanceModal">立即申请</button>
+                            </div>
+                            <div>
+                                <h6>存货质押融资</h6>
+                                <p class="text-muted">将合格农产品存货质押上链，获取流动资金。</p>
+                                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#inventoryFinanceModal">立即申请</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 信用积分兑换 -->
+    <section class="py-5" id="credit-mall">
+        <div class="container">
+            <h2 class="text-center mb-5">信用积分商城</h2>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <div class="bg-success bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                <i class="bi bi-basket fs-1 text-success"></i>
+                            </div>
+                            <h5>农资优惠</h5>
+                            <p class="text-muted">使用农信分兑换化肥、种子等农资采购折扣</p>
+                            <div class="my-3">
+                                <span class="badge bg-success">100农信分=5%折扣</span>
+                            </div>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#farmSuppliesModal">立即兑换</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <div class="bg-success bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                <i class="bi bi-shield-check fs-1 text-success"></i>
+                            </div>
+                            <h5>农业保险</h5>
+                            <p class="text-muted">减免农业保险免赔额或增加保额</p>
+                            <div class="my-3">
+                                <span class="badge bg-success">200农信分=10%保费减免</span>
+                            </div>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#insuranceModal">立即兑换</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body text-center">
+                            <div class="bg-success bg-opacity-10 p-3 rounded-circle d-inline-block mb-3">
+                                <i class="bi bi-file-earmark-text fs-1 text-success"></i>
+                            </div>
+                            <h5>政务服务</h5>
+                            <p class="text-muted">优先办理宅基地审批、补贴申请等政务事项</p>
+                            <div class="my-3">
+                                <span class="badge bg-success">150农信分=绿色通道</span>
+                            </div>
+                            <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#govServiceModal">立即兑换</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">我的农信分</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="text-center">
+                                <div class="display-3 fw-bold text-success">768</div>
+                                <p class="text-muted">当前可用积分</p>
+                                <div class="progress mb-3" style="height: 10px;">
+                                    <div class="progress-bar bg-success" style="width: 76.8%;"></div>
+                                </div>
+                                <small class="text-muted">下一等级(1000分)还需232分</small>
+                            </div>
+                            <div class="mt-4">
+                                <h6>积分获取方式</h6>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        按时还款
+                                        <span class="badge bg-success rounded-pill">+10分/次</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        订单履约
+                                        <span class="badge bg-success rounded-pill">+5分/次</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        参与集体活动
+                                        <span class="badge bg-success rounded-pill">+3分/次</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">积分兑换记录</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span>化肥采购折扣</span>
+                                        <span class="text-danger">-100分</span>
+                                    </div>
+                                    <small class="text-muted">2023-09-28 10:15</small>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span>农业保险减免</span>
+                                        <span class="text-danger">-200分</span>
+                                    </div>
+                                    <small class="text-muted">2023-08-15 14:30</small>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span>宅基地审批加速</span>
+                                        <span class="text-danger">-150分</span>
+                                    </div>
+                                    <small class="text-muted">2023-07-05 09:20</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-transparent">
+                            <a href="#" class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#creditHistoryModal">查看全部记录</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 边缘计算节点状态 -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">村级服务站状态</h2>
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">边缘计算节点</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="text-center">
+                                        <div class="display-4 fw-bold">98%</div>
+                                        <small class="text-muted">在线率</small>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="text-center">
+                                        <div class="display-4 fw-bold">24ms</div>
+                                        <small class="text-muted">平均延迟</small>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>区块链同步状态</span>
+                                    <span class="badge bg-success">正常</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>联邦学习模型版本</span>
+                                    <span>v2.3.5</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>离线数据包</span>
+                                    <span class="badge bg-success">已更新</span>
+                                </div>
+                            </div>
+                            <div class="text-center mt-4">
+                                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#nodeDetailModal">查看节点详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 mb-4">
+                    <div class="card h-100">
+                        <div class="card-header bg-success text-white">
+                            <h5 class="mb-0">数据同步状态</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="dataSyncChart" height="200"></canvas>
+                            <div class="mt-3">
+                                <div class="d-flex justify-content-between">
+                                    <span>政务数据</span>
+                                    <span class="badge bg-success">已同步</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>金融数据</span>
+                                    <span class="badge bg-success">已同步</span>
+                                </div>
+                                <div class="d-flex justify-content-between">
+                                    <span>生产数据</span>
+                                    <span class="badge bg-warning text-dark">同步中</span>
+                                </div>
+                            </div>
+                            <div class="text-center mt-3">
+                                <button class="btn btn-sm btn-outline-success" data-bs-toggle="modal" data-bs-target="#syncDetailModal">查看同步详情</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>关于农信链</h5>
+                    <p>基于区块链与AI技术的农村信用生态构建者，致力于激活9亿农民的"沉睡信用资产"。</p>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white"><i class="bi bi-wechat fs-4"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-weibo fs-4"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-youtube fs-4"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>快速链接</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-white text-decoration-none">首页</a></li>
+                        <li class="mb-2"><a href="#credit-center" class="text-white text-decoration-none">信用中心</a></li>
+                        <li class="mb-2"><a href="#financial-services" class="text-white text-decoration-none">金融服务</a></li>
+                        <li class="mb-2"><a href="#supply-chain" class="text-white text-decoration-none">供应链</a></li>
+                        <li><a href="#credit-mall" class="text-white text-decoration-none">积分商城</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>合作伙伴</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">农业农村部</li>
+                        <li class="mb-2">中国银保监会</li>
+                        <li class="mb-2">微众银行</li>
+                        <li class="mb-2">国经安实验室</li>
+                        <li>FISCO BCOS</li>
+                    </ul>
+                </div>
+                <div class="col-md-3 mb-4">
+                    <h5>联系我们</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i> 400-888-8888</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i> contact@nongxinchain.com</li>
+                        <li><i class="bi bi-geo-alt me-2"></i> 北京市海淀区中关村南大街5号</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4">
+            <div class="text-center">
+                <p class="mb-0">© 2023 农信链项目组. 版权所有.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 各种模态框 -->
+    <!-- 信用详情模态框 -->
+    <div class="modal fade" id="creditDetailModal" tabindex="-1" aria-labelledby="creditDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="creditDetailModalLabel">信用详情</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>信用评分构成</h6>
+                            <canvas id="creditDetailChart" height="200"></canvas>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>信用等级说明</h6>
+                            <div class="list-group">
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span>优秀</span>
+                                        <span>900-1000分</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span>良好</span>
+                                        <span>750-899分</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span>一般</span>
+                                        <span>600-749分</span>
+                                    </div>
+                                </div>
+                                <div class="list-group-item">
+                                    <div class="d-flex justify-content-between">
+                                        <span>待提升</span>
+                                        <span>0-599分</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        <h6>提升建议</h6>
+                        <ul>
+                            <li>按时偿还贷款可提升履约能力评分</li>
+                            <li>增加与核心企业的订单合作可提升产业链地位</li>
+                            <li>参与集体企业的订单合作可提升社会信用评分</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">确定</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 贷款详情模态框 -->
+    <div class="modal fade" id="loanDetailModal" tabindex="-1" aria-labelledby="loanDetailModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loanDetailModalLabel">贷款申请</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <label class="form-label">贷款产品</label>
+                            <input type="text" class="form-control" value="春耕贷" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loanAmount" class="form-label">申请金额(元)</label>
+                            <input type="number" class="form-control" id="loanAmount" placeholder="请输入申请金额">
+                        </div>
+                        <div class="mb-3">
+                            <label for="loanTerm" class="form-label">贷款期限</label>
+                            <select class="form-select" id="loanTerm">
+                                <option value="1">1年</option>
+                                <option value="2">2年</option>
+                                <option value="3">3年</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">预计利率</label>
+                            <input type="text" class="form-control" value="4.35%" readonly>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="agreeLoanTerms">
+                            <label class="form-check-label" for="agreeLoanTerms">我已阅读并同意<a href="#" class="text-success">《贷款协议》</a></label>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-success">提交申请</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 其他模态框结构类似，可根据需要添加 -->
+    <!-- 土地数据详情模态框 -->
+    <div class="modal fade" id="landDataModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 交易记录详情模态框 -->
+    <div class="modal fade" id="transactionModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 生产数据详情模态框 -->
+    <div class="modal fade" id="productionDataModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 社会评价详情模态框 -->
+    <div class="modal fade" id="socialRatingModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 信用历史记录模态框 -->
+    <div class="modal fade" id="creditHistoryModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 所有贷款产品模态框 -->
+    <div class="modal fade" id="allLoansModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 供应链详情模态框 -->
+    <div class="modal fade" id="supplyChainDetailModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 订单分析模态框 -->
+    <div class="modal fade" id="orderAnalysisModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 合作伙伴详情模态框 -->
+    <div class="modal fade" id="partnerDetailModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 所有合作伙伴模态框 -->
+    <div class="modal fade" id="allPartnersModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 应收账款融资模态框 -->
+    <div class="modal fade" id="receivablesModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 订单融资模态框 -->
+    <div class="modal fade" id="orderFinanceModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 存货质押融资模态框 -->
+    <div class="modal fade" id="inventoryFinanceModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 农资优惠兑换模态框 -->
+    <div class="modal fade" id="farmSuppliesModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 保险兑换模态框 -->
+    <div class="modal fade" id="insuranceModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 政务服务兑换模态框 -->
+    <div class="modal fade" id="govServiceModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 节点详情模态框 -->
+    <div class="modal fade" id="nodeDetailModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+    
+    <!-- 同步详情模态框 -->
+    <div class="modal fade" id="syncDetailModal" tabindex="-1" aria-hidden="true">
+        <!-- 内容省略 -->
+    </div>
+
+    <!-- 脚本 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js"></script>
+    <script>
+        // 信用雷达图
+        const creditRadarCtx = document.getElementById('creditRadarChart').getContext('2d');
+        const creditRadarChart = new Chart(creditRadarCtx, {
+            type: 'radar',
+            data: {
+                labels: ['生产稳定性', '履约能力', '社会信用', '资产流动性', '产业链地位'],
+                datasets: [{
+                    label: '我的信用',
+                    data: [85, 90, 75, 70, 80],
+                    backgroundColor: 'rgba(46, 125, 50, 0.2)',
+                    borderColor: 'rgba(46, 125, 50, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(46, 125, 50, 1)',
+                    pointRadius: 4
+                }, {
+                    label: '行业平均',
+                    data: [65, 70, 60, 55, 65],
+                    backgroundColor: 'rgba(158, 157, 155, 0.2)',
+                    borderColor: 'rgba(158, 157, 155, 1)',
+                    borderWidth: 2,
+                    pointBackgroundColor: 'rgba(158, 157, 155, 1)',
+                    pointRadius: 4
+                }]
+            },
+            options: {
+                scales: {
+                    r: {
+                        angleLines: {
+                            display: true
+                        },
+                        suggestedMin: 0,
+                        suggestedMax: 100
+                    }
+                }
+            }
+        });
+
+        // 订单履约率图表
+        const orderFulfillmentCtx = document.getElementById('orderFulfillmentChart').getContext('2d');
+        const orderFulfillmentChart = new Chart(orderFulfillmentCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2021', '2022', '2023'],
+                datasets: [{
+                    label: '我的履约率',
+                    data: [88, 90, 92],
+                    backgroundColor: 'rgba(46, 125, 50, 0.7)',
+                    borderColor: 'rgba(46, 125, 50, 1)',
+                    borderWidth: 1
+                }, {
+                    label: '行业平均',
+                    data: [80, 82, 85],
+                    backgroundColor: 'rgba(158, 157, 155, 0.7)',
+                    borderColor: 'rgba(158, 157, 155, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100
+                    }
+                }
+            }
+        });
+
+        // 数据同步图表
+        const dataSyncCtx = document.getElementById('dataSyncChart').getContext('2d');
+        const dataSyncChart = new Chart(dataSyncCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['政务数据', '金融数据', '生产数据', '社会数据'],
+                datasets: [{
+                    data: [35, 30, 25, 10],
+                    backgroundColor: [
+                        'rgba(46, 125, 50, 0.7)',
+                        'rgba(104, 159, 56, 0.7)',
+                        'rgba(139, 195, 74, 0.7)',
+                        'rgba(220, 237, 200, 0.7)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                cutout: '70%'
+            }
+        });
+
+        // 供应链网络图
+        const supplyChainGraph = echarts.init(document.getElementById('supplyChainGraph'));
+        const option = {
+            tooltip: {},
+            legend: {
+                data: ['农户', '合作社', '加工企业']
+            },
+            series: [{
+                type: 'graph',
+                layout: 'circular',
+                data: [{
+                    name: '您',
+                    symbolSize: 30,
+                    itemStyle: {
+                        color: '#2e7d32'
+                    },
+                    category: '农户'
+                }, {
+                    name: '绿丰合作社',
+                    symbolSize: 25,
+                    itemStyle: {
+                        color: '#689f38'
+                    },
+                    category: '合作社'
+                }, {
+                    name: '大地合作社',
+                    symbolSize: 25,
+                    itemStyle: {
+                        color: '#689f38'
+                    },
+                    category: '合作社'
+                }, {
+                    name: '田园食品',
+                    symbolSize: 20,
+                    itemStyle: {
+                        color: '#8bc34a'
+                    },
+                    category: '加工企业'
+                }, {
+                    name: '绿源农业',
+                    symbolSize: 20,
+                    itemStyle: {
+                        color: '#8bc34a'
+                    },
+                    category: '加工企业'
+                }],
+                links: [{
+                    source: '您',
+                    target: '绿丰合作社',
+                    value: '订单量: 85%'
+                }, {
+                    source: '您',
+                    target: '大地合作社',
+                    value: '订单量: 15%'
+                }, {
+                    source: '绿丰合作社',
+                    target: '田园食品',
+                    value: '供货量: 60%'
+                }, {
+                    source: '绿丰合作社',
+                    target: '绿源农业',
+                    value: '供货量: 40%'
+                }],
+                categories: [{
+                    name: '农户'
+                }, {
+                    name: '合作社'
+                }, {
+                    name: '加工企业'
+                }],
+                roam: true,
+                label: {
+                    show: true,
+                    position: 'right'
+                },
+                edgeLabel: {
+                    show: true,
+                    formatter: '{c}'
+                },
+                lineStyle: {
+                    width: 2,
+                    curveness: 0.2
+                }
+            }]
+        };
+        supplyChainGraph.setOption(option);
+
+        // 信用详情图表
+        document.getElementById('creditDetailModal').addEventListener('shown.bs.modal', function() {
+            const creditDetailCtx = document.getElementById('creditDetailChart').getContext('2d');
+            new Chart(creditDetailCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['生产稳定性', '履约能力', '社会信用', '资产流动性', '产业链地位'],
+                    datasets: [{
+                        data: [25, 30, 15, 10, 20],
+                        backgroundColor: [
+                            'rgba(46, 125, 50, 0.7)',
+                            'rgba(104, 159, 56, 0.7)',
+                            'rgba(139, 195, 74, 0.7)',
+                            'rgba(188, 222, 139, 0.7)',
+                            'rgba(220, 237, 200, 0.7)'
+                        ],
+                        borderWidth: 1
+                    }]
+                }
+            });
+        });
+
+        // 验证码发送按钮倒计时
+        document.getElementById('sendCodeBtn').addEventListener('click', function() {
+            let countdown = 60;
+            const btn = this;
+            btn.disabled = true;
+            btn.textContent = `${countdown}秒后重试`;
+            const timer = setInterval(() => {
+                countdown--;
+                btn.textContent = `${countdown}秒后重试`;
+                if (countdown <= 0) {
+                    clearInterval(timer);
+                    btn.disabled = false;
+                    btn.textContent = '获取验证码';
+                }
+            }, 1000);
+        });
+
+        // 响应式调整
+        window.addEventListener('resize', function() {
+            supplyChainGraph.resize();
+        });
+
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // 更新导航栏活动状态
+                    document.querySelectorAll('.navbar-nav .nav-link').forEach(link => {
+                        link.classList.remove('active');
+                    });
+                    this.classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+// 权限验证
+function checkAdmin() {
+    const token = localStorage.getItem('adminToken');
+    document.getElementById('adminLink').style.display = token ? 'block' : 'none';
+}
+document.addEventListener('DOMContentLoaded', checkAdmin);
+</script>
